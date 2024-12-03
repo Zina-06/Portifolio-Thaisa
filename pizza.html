@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comer pizza</title>
+    <style>
+        body {
+            margin-top: 100px;
+            text-align: center;
+            background-color: rgb(231, 225, 217);
+        }
+
+        img {
+            margin-top: 10px;
+            height: 300px;
+            width: auto;
+        }
+
+        button {
+            background-color: rgb(170, 101, 80);
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 1px;
+            color: rgb(255, 255, 255);
+        }
+        .comer:hover{
+            background-color: rgb(154, 101, 81);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Have a Slice of Pizza, Nham!</h1>
+    <img src="https://png.pngtree.com/png-clipart/20230913/original/pngtree-pizza-free-vector-png-image_11075017.png"
+        alt="imagem pizza">
+      
+    <p id="fatia">Eat a delicious slice: 8</p>
+    <button type="button" class="comer" id="comer">Nhac</button>    
+    <p id="mensagem"></p>
+
+    <script>
+        var fatiasrestantes = 8
+        document.getElementById('comer').addEventListener("click", function () {
+            const fatiaElem = document.getElementById('fatia');
+            const mensagem = document.getElementById('mensagem');
+
+            while (fatiasrestantes > 0) {
+                fatiasrestantes--;
+                fatiaElem.textContent = `Eat a delicious slice: ${fatiasrestantes}`
+                mensagem.textContent = "nom-nom-nom..."
+
+                break;
+            }
+            if (fatiasrestantes === 0) {
+                mensagem = document.getElementById('mensagem').innerHTML = "You are full of pizza!!"
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

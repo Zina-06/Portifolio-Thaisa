@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            background-image: url(https://www.hosergipe.com.br/index/wp-content/uploads/2018/02/site-4.jpg);
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="profile.html"> <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+            class="bi bi-arrow-left-short mt-4 mx-3" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg></a>
+    <div class="container d-flex aling-items-center justify-content-center p-5 mt-5 ">
+        <div class="bg-opacity-50 bg-dark p-5 rounded-4 ">
+            <form action="active">
+                <h2 class="text-center text-light">Fale Conosco</h2>
+                <p class="fs-6 my-0"><strong>cadastro</strong></p>
+                <!--Celulas cadastro-->
+                <div class="row">
+                    <div class="col">
+                        <label for="">Nome</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Digite seu nome..." type="text"
+                                aria-label="Username" aria-describedby="basic-addon1" id="insira">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="">E-mail</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Digite um e-mail válido..." type="email"
+                                id="email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="">Sobrenome</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="Digite seu último nome..." type="text"
+                                id="sobrenome">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="">Telefone</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" placeholder="(00)00000-0000" type="text" id="telefone">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="contato" class="form-label">Mensagem</label>
+                            <textarea class="form-control" placeholder="Informe seus interesses..." id="mensagem"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col mt-1">
+                        <label for="">Genêro</label>
+                        <div class="input-group mt-2 mb-1 ">
+                            <input class="form-check-input" type="radio" name="genero" value="feminino" >
+                            <label class="form-check-label mx-1" for="feminino">Feminino</label>
+
+                        </div>
+                        <div class="input-group mb-1 ">
+                            <input class="form-check-input" type="radio" name="genero" value="masculino">
+                            <label class="form-check-label mx-1" for="masculino">Masculino</label>
+
+                        </div>
+                        <div class="input-group ">
+                            <input class="form-check-input" type="radio" name="genero" value="outro">
+                            <label class="form-check-label mx-1" for="outro">Prefiro não informar</label>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mb-2">
+                    <label>
+                        <input type="checkbox" name="checkbox" value="checked" id="checkbox"> Concordo com o processamento,
+                        armazenamento e utilização dos meus dados pessoais
+                    </label>
+                </div>
+
+                <input class="btn btn-primary " type="button" value="Enviar Contato" id="validarDados">
+                <p id="mensagemErro"></p>
+                
+
+            </form>
+        </div>
+    </div>
+
+    <script src="bootstrap.bundle.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fone = document.getElementById('telefone');
+            const validar = document.getElementById('validarDados');
+            const erro = document.getElementById('mensagemErro');
+            const nomeValor = document.getElementById('insira');
+            const sobrenomeValor = document.getElementById('sobrenome');
+            const mensagemValor = document.getElementById('mensagem');
+            const check = document.getElementById('checkbox');
+            const radios = document.getElementsByName('genero');
+            const emailValor=document.getElementById('email')
+    
+            fone.addEventListener('input', function () {
+                fone.value = fone.value.replace(/\D/g, ''); 
+            });
+    
+            validar.addEventListener('click', function (e) {
+                e.preventDefault(); 
+    
+                const numero = fone.value.trim();
+                const nome = nomeValor.value.trim();
+                const sobrenome = sobrenomeValor.value.trim();
+                const mensagem = mensagemValor.value.trim();
+                const email=emailValor.value.trim();
+    
+                // Validação dos radios
+                let radioSelecionado = false;
+                radios.forEach(radio => {
+                    if (radio.checked) {
+                        radioSelecionado = true;
+                    }
+                });
+
+                const emailValido=email.includes('@');
+    
+                // Verificação dos campos
+                if (
+                    numero.length !== 11 ||
+                    nome === "" ||
+                    sobrenome === "" ||
+                    mensagem === "" ||
+                    !check.checked || 
+                    !radioSelecionado ||
+                    !emailValido
+                ) {
+                    erro.textContent = "Erro! Verifique se todos os campos estão preenchidos corretamente";
+                } else {
+                    erro.textContent = ""; 
+                    alert('Seu contato foi enviado com sucesso');
+                }
+            });
+        });
+    </script>
+    
+
+
+
+</body>
+
+</html>
